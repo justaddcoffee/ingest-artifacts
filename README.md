@@ -6,7 +6,7 @@ In Ingest-Artifact repo here, each Dipper data source  will have its own directo
   
  - _**Source Data Views:**_  Curated subsets or cleaned versions of source data that facilitate exploration and QA.
  - _**Python Notebooks:**_   Sharable, public notebooks set up for programmatic exploration of source data to be consumed by Dipper, or for QA of transformed Dipper outputs.
-- _**Developer Cmaps:**_   Standardized diagrams that specify a target data model for a particular source, along with informal transform specifications for mapping source data to the target model.
+- _**Ontologist Cmaps:**_   Standardized diagrams that specify a target data model for a particular source, along with informal transform specifications for mapping source data to the target model.
  - _**Dipper test.ttl files:**_  Slim versions of each transformed data set that holds selected subset of records for QA and testing purposes.
  - _**Test Query Sets:**_   SPARQL or Cypher query sets used for exploration and QA of Dipper outputs. 
  - _**Public Documentation:**_  Draft versions of data model diagrams scoped for public consumption.
