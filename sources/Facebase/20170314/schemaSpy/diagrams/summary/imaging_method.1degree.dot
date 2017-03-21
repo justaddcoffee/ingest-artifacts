@@ -1,0 +1,31 @@
+// dot 2.38.0 on Linux 4.4.0-53-generic
+// SchemaSpy rev 590
+digraph "imaging_method" {
+  graph [
+    rankdir="RL"
+    bgcolor="#f7f7f7"
+    nodesep="0.18"
+    ranksep="0.46"
+    fontname="Helvetica"
+    fontsize="11"
+  ];
+  node [
+    fontname="Helvetica"
+    fontsize="11"
+    shape="plaintext"
+  ];
+  edge [
+    arrowsize="0.8"
+  ];
+  "imaging_method" [
+    label=<
+    <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" BGCOLOR="#ffffff">
+      <TR><TD COLSPAN="3" BGCOLOR="#9bab96" ALIGN="CENTER">imaging_method</TD></TR>
+      <TR><TD PORT="term" COLSPAN="3" BGCOLOR="#bed1b8" ALIGN="LEFT">term</TD></TR>
+      <TR><TD PORT="iri" COLSPAN="3" ALIGN="LEFT">iri</TD></TR>
+      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">  </TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">16 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">  </TD></TR>
+    </TABLE>>
+    URL="tables/imaging_method.html"
+    tooltip="imaging_method"
+  ];
+}

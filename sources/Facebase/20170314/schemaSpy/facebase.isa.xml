@@ -1,0 +1,943 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<database name="facebase" schema="isa" type="PostgreSQL - 9.6.2">
+   <tables>
+      <table name="alignment" numRows="20" remarks="" schema="isa" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('alignment_id_seq'::regclass)" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="serial">
+            <child column="alignment_id" foreignKey="assay_alignment_id_fkey" implied="false" onDeleteCascade="false" table="assay"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="name" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="2" name="aligner" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="3" name="aligner_version" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="4" name="aligner_flags" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="5" name="reference_genome" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="6" name="transcriptome_model" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="7" name="sequence_trimming" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="8" name="trimmed_seqs" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="9" name="trimming_method" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="10" name="duplicate_removal" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="11" name="prealign_seq_removal" nullable="true" remarks="" size="2147483647" type="text"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+      </table>
+      <table name="assay" numRows="20" remarks="" schema="isa" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('assay_id_seq'::regclass)" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="serial">
+            <child column="assay_id" foreignKey="assay_file_assay_id_fkey" implied="false" onDeleteCascade="false" table="assay_file"/>
+            <child column="assay" foreignKey="track_file_assay_fkey" implied="false" onDeleteCascade="false" table="track_file"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="accession_number" nullable="false" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="2" name="dataset" nullable="false" remarks="" size="10" type="int4">
+            <parent column="id" foreignKey="assay_dataset_fkey" implied="false" onDeleteCascade="false" table="dataset"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="3" name="sample" nullable="false" remarks="" size="10" type="int4">
+            <parent column="id" foreignKey="assay_sample_fkey" implied="false" onDeleteCascade="false" table="sample"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="4" name="replicate" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="5" name="sample_composition" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="6" name="sample_type" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="7" name="molecule_type" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="8" name="sample_purification" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="9" name="markers" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="10" name="isolation_protocol" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="11" name="cell_count" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="12" name="protocol" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="13" name="pretreatment" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="14" name="fragmentation_method" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="15" name="reagent" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="16" name="reagent_source" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="17" name="reagent_catalog_number" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="18" name="reagent_batch_number" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="19" name="selection" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="20" name="library_id" nullable="true" remarks="" size="10" type="int4">
+            <parent column="id" foreignKey="assay_library_id_fkey" implied="false" onDeleteCascade="false" table="library"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="21" name="alignment_id" nullable="true" remarks="" size="10" type="int4">
+            <parent column="id" foreignKey="assay_alignment_id_fkey" implied="false" onDeleteCascade="false" table="alignment"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="22" name="tracks_id" nullable="true" remarks="" size="10" type="int4">
+            <parent column="id" foreignKey="assay_tracks_id_fkey" implied="false" onDeleteCascade="false" table="tracks"/>
+         </column>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+      </table>
+      <table name="assay_file" numRows="70" remarks="" schema="isa" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="assay_id" nullable="false" remarks="" size="10" type="int4">
+            <parent column="id" foreignKey="assay_file_assay_id_fkey" implied="false" onDeleteCascade="false" table="assay"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="file_id" nullable="false" remarks="" size="10" type="int4">
+            <parent column="id" foreignKey="assay_file_file_id_fkey" implied="false" onDeleteCascade="false" table="file"/>
+         </column>
+         <primaryKey column="assay_id" sequenceNumberInPK="1"/>
+         <primaryKey column="file_id" sequenceNumberInPK="2"/>
+      </table>
+      <table name="clinical" numRows="0" remarks="" schema="isa" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('clinical_id_seq'::regclass)" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="serial">
+            <child column="clinical" foreignKey="sample_clinical_fkey" implied="false" onDeleteCascade="false" table="sample"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="age" nullable="true" remarks="" size="10" type="int4"/>
+         <column autoUpdated="false" digits="17" id="2" name="height" nullable="true" remarks="" size="17" type="float8"/>
+         <column autoUpdated="false" digits="17" id="3" name="weight" nullable="true" remarks="" size="17" type="float8"/>
+         <column autoUpdated="false" digits="17" id="4" name="head_circumference" nullable="true" remarks="" size="17" type="float8"/>
+         <column autoUpdated="false" digits="0" id="5" name="omim_diagnosis" nullable="true" remarks="" size="10" type="int4">
+            <parent column="id" foreignKey="clinical_omim_diagnosis_fkey" implied="false" onDeleteCascade="false" table="omim_diagnosis"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="6" name="omim_code" nullable="true" remarks="" size="10" type="int4">
+            <parent column="id" foreignKey="clinical_omim_code_fkey" implied="false" onDeleteCascade="false" table="omim_code"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="7" name="icd10_diagnosis" nullable="true" remarks="" size="10" type="int4">
+            <parent column="id" foreignKey="clinical_icd10_diagnosis_fkey" implied="false" onDeleteCascade="false" table="icd10_diagnosis"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="8" name="icd10_code" nullable="true" remarks="" size="10" type="int4">
+            <parent column="id" foreignKey="clinical_icd10_code_fkey" implied="false" onDeleteCascade="false" table="icd10_code"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="9" name="molecular_cytogenetic_diagnosis" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="10" name="diagnostic_evidence_notes" nullable="true" remarks="" size="2147483647" type="text"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+      </table>
+      <table name="data_type" numRows="14" remarks="vocabulary" schema="isa" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="term" nullable="false" remarks="" size="2147483647" type="text">
+            <child column="data_type" foreignKey="dataset_data_type_data_type_fkey" implied="false" onDeleteCascade="true" table="dataset_data_type"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="iri" nullable="true" remarks="" size="2147483647" type="text"/>
+         <primaryKey column="term" sequenceNumberInPK="1"/>
+      </table>
+      <table name="dataset" numRows="689" remarks="this is an asset/collection" schema="isa" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="id" nullable="false" remarks="" size="19" type="int8">
+            <child column="dataset" foreignKey="assay_dataset_fkey" implied="false" onDeleteCascade="false" table="assay"/>
+            <child column="dataset_id" foreignKey="dataset_chromosome_dataset_id_fkey" implied="false" onDeleteCascade="true" table="dataset_chromosome"/>
+            <child column="dataset_id" foreignKey="dataset_data_type_dataset_id_fkey" implied="false" onDeleteCascade="true" table="dataset_data_type"/>
+            <child column="dataset_id" foreignKey="dataset_experiment_type_dataset_id_fkey" implied="false" onDeleteCascade="false" table="dataset_experiment_type"/>
+            <child column="dataset_id" foreignKey="dataset_file_dataset_id_fkey" implied="false" onDeleteCascade="true" table="dataset_file"/>
+            <child column="dataset_id" foreignKey="dataset_geo_dataset_id_fkey" implied="false" onDeleteCascade="true" table="dataset_geo"/>
+            <child column="dataset_id" foreignKey="dataset_human_age_dataset_id_fkey" implied="false" onDeleteCascade="false" table="dataset_human_age"/>
+            <child column="dataset_id" foreignKey="dataset_human_age_stage_dataset_id_fkey" implied="false" onDeleteCascade="true" table="dataset_human_age_stage"/>
+            <child column="dataset_id" foreignKey="dataset_human_anatomic_source_dataset_id_fkey" implied="false" onDeleteCascade="true" table="dataset_human_anatomic_source"/>
+            <child column="dataset_id" foreignKey="dataset_human_enhancer_dataset_id_fkey" implied="false" onDeleteCascade="true" table="dataset_human_enhancer"/>
+            <child column="dataset_id" foreignKey="dataset_human_gender_dataset_id_fkey" implied="false" onDeleteCascade="true" table="dataset_human_gender"/>
+            <child column="dataset_id" foreignKey="dataset_human_phenotype_dataset_id_fkey" implied="false" onDeleteCascade="true" table="dataset_human_phenotype"/>
+            <child column="dataset_id" foreignKey="dataset_image_dataset_id_fkey" implied="false" onDeleteCascade="true" table="dataset_image"/>
+            <child column="dataset_id" foreignKey="dataset_instrument_dataset_id_fkey" implied="false" onDeleteCascade="true" table="dataset_instrument"/>
+            <child column="dataset_id" foreignKey="dataset_mouse_age_stage_dataset_id_fkey" implied="false" onDeleteCascade="true" table="dataset_mouse_age_stage"/>
+            <child column="dataset_id" foreignKey="dataset_mouse_anatomic_source_dataset_id_fkey" implied="false" onDeleteCascade="true" table="dataset_mouse_anatomic_source"/>
+            <child column="dataset_id" foreignKey="dataset_mouse_enhancer_dataset_id_fkey" implied="false" onDeleteCascade="true" table="dataset_mouse_enhancer"/>
+            <child column="dataset_id" foreignKey="dataset_mouse_gene_dataset_id_fkey" implied="false" onDeleteCascade="true" table="dataset_mouse_gene"/>
+            <child column="dataset_id" foreignKey="dataset_mouse_genetic_background_dataset_id_fkey" implied="false" onDeleteCascade="true" table="dataset_mouse_genetic_background"/>
+            <child column="dataset_id" foreignKey="dataset_mouse_genotype_dataset_id_fkey" implied="false" onDeleteCascade="true" table="dataset_mouse_genotype"/>
+            <child column="dataset_id" foreignKey="dataset_mouse_mutation_dataset_id_fkey" implied="false" onDeleteCascade="true" table="dataset_mouse_mutation"/>
+            <child column="dataset_id" foreignKey="dataset_mouse_phenotype_dataset_id_fkey" implied="false" onDeleteCascade="true" table="dataset_mouse_phenotype"/>
+            <child column="dataset_id" foreignKey="dataset_mouse_theiler_stage_dataset_id_fkey" implied="false" onDeleteCascade="false" table="dataset_mouse_theiler_stage"/>
+            <child column="dataset_id" foreignKey="dataset_organism_dataset_id_fkey" implied="false" onDeleteCascade="true" table="dataset_organism"/>
+            <child column="dataset_id" foreignKey="dataset_preview_dataset_id_fkey" implied="false" onDeleteCascade="true" table="dataset_preview"/>
+            <child column="dataset_id" foreignKey="dataset_somite_count_dataset_id_fkey" implied="false" onDeleteCascade="true" table="dataset_somite_count"/>
+            <child column="dataset_id" foreignKey="dataset_zebrafish_age_stage_dataset_id_fkey" implied="false" onDeleteCascade="true" table="dataset_zebrafish_age_stage"/>
+            <child column="dataset_id" foreignKey="dataset_zebrafish_anatomic_source_dataset_id_fkey" implied="false" onDeleteCascade="true" table="dataset_zebrafish_anatomic_source"/>
+            <child column="dataset_id" foreignKey="dataset_zebrafish_genotype_dataset_id_fkey" implied="false" onDeleteCascade="true" table="dataset_zebrafish_genotype"/>
+            <child column="dataset_id" foreignKey="dataset_zebrafish_mutation_dataset_id_fkey" implied="false" onDeleteCascade="false" table="dataset_zebrafish_mutation"/>
+            <child column="dataset_id" foreignKey="dataset_zebrafish_phenotype_dataset_id_fkey" implied="false" onDeleteCascade="false" table="dataset_zebrafish_phenotype"/>
+            <child column="dataset" foreignKey="enhancer_dataset_fkey" implied="false" onDeleteCascade="false" table="enhancer"/>
+            <child column="id" foreignKey="external_reference_id_fkey" implied="false" onDeleteCascade="true" table="external_reference"/>
+            <child column="dataset" foreignKey="imaging_dataset_fkey" implied="false" onDeleteCascade="false" table="imaging"/>
+            <child column="dataset" foreignKey="publication_dataset_fkey" implied="false" onDeleteCascade="false" table="publication"/>
+            <child column="dataset" foreignKey="sample_dataset_fkey" implied="false" onDeleteCascade="false" table="sample"/>
+            <child column="dataset" foreignKey="track_file_dataset_fkey" implied="false" onDeleteCascade="false" table="track_file"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="accession" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="2" name="pubmed_id" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="3" name="title" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="4" name="owner" nullable="true" remarks="" size="2147483647" type="text">
+            <parent column="name" foreignKey="dataset_owner_fkey" implied="false" onDeleteCascade="true" table="person"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="5" name="project" nullable="true" remarks="" size="19" type="int8">
+            <parent column="id" foreignKey="dataset_project_fkey" implied="false" onDeleteCascade="true" table="project"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="6" name="funding" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="7" name="summary" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="8" name="description" nullable="true" remarks="" size="2147483647" type="markdown"/>
+         <column autoUpdated="false" digits="0" id="9" name="thumbnail" nullable="true" remarks="" size="19" type="int8">
+            <parent column="id" foreignKey="dataset_thumbnail_fkey" implied="false" onDeleteCascade="false" table="file"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="10" name="view_gene_summary" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="11" name="view_related_datasets" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="12" name="mouse_genetic" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="13" name="human_anatomic" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="14" name="study_design" nullable="true" remarks="" size="2147483647" type="markdown"/>
+         <column autoUpdated="false" digits="0" id="15" name="release_date" nullable="true" remarks="" size="13" type="date"/>
+         <column autoUpdated="false" defaultValue="1" digits="0" id="16" name="status" nullable="true" remarks="" size="10" type="int4">
+            <parent column="id" foreignKey="dataset_status_fkey" implied="false" onDeleteCascade="false" table="dataset_status"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="17" name="gene_summary" nullable="true" remarks="" size="10" type="int4">
+            <parent column="id" foreignKey="dataset_gene_summary_fkey" implied="false" onDeleteCascade="false" table="gene_summary"/>
+         </column>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+      </table>
+      <table name="dataset_chromosome" numRows="74" remarks="" schema="isa" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="dataset_id" nullable="false" remarks="" size="19" type="int8">
+            <parent column="id" foreignKey="dataset_chromosome_dataset_id_fkey" implied="false" onDeleteCascade="true" table="dataset"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="chromosome" nullable="false" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="2" name="start_position" nullable="false" remarks="" size="19" type="int8"/>
+         <column autoUpdated="false" digits="0" id="3" name="end_position" nullable="false" remarks="" size="19" type="int8"/>
+         <primaryKey column="dataset_id" sequenceNumberInPK="1"/>
+         <primaryKey column="chromosome" sequenceNumberInPK="2"/>
+         <primaryKey column="start_position" sequenceNumberInPK="3"/>
+         <primaryKey column="end_position" sequenceNumberInPK="4"/>
+      </table>
+      <table name="dataset_data_type" numRows="728" remarks="" schema="isa" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="dataset_id" nullable="false" remarks="" size="19" type="int8">
+            <parent column="id" foreignKey="dataset_data_type_dataset_id_fkey" implied="false" onDeleteCascade="true" table="dataset"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="data_type" nullable="false" remarks="" size="2147483647" type="text">
+            <parent column="term" foreignKey="dataset_data_type_data_type_fkey" implied="false" onDeleteCascade="true" table="data_type"/>
+         </column>
+         <primaryKey column="dataset_id" sequenceNumberInPK="1"/>
+         <primaryKey column="data_type" sequenceNumberInPK="2"/>
+      </table>
+      <table name="dataset_experiment_type" numRows="665" remarks="" schema="isa" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="dataset_id" nullable="false" remarks="" size="10" type="int4">
+            <parent column="id" foreignKey="dataset_experiment_type_dataset_id_fkey" implied="false" onDeleteCascade="false" table="dataset"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="experiment_type" nullable="false" remarks="" size="2147483647" type="text">
+            <parent column="term" foreignKey="dataset_experiment_type_experiment_type_fkey" implied="false" onDeleteCascade="false" table="experiment_type"/>
+         </column>
+         <primaryKey column="dataset_id" sequenceNumberInPK="1"/>
+         <primaryKey column="experiment_type" sequenceNumberInPK="2"/>
+      </table>
+      <table name="dataset_file" numRows="1640" remarks="this is an asset/association table" schema="isa" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="dataset_id" nullable="false" remarks="" size="19" type="int8">
+            <parent column="id" foreignKey="dataset_file_dataset_id_fkey" implied="false" onDeleteCascade="true" table="dataset"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="file_id" nullable="false" remarks="this is an asset/reference" size="19" type="int8">
+            <parent column="id" foreignKey="dataset_file_file_id_fkey" implied="false" onDeleteCascade="true" table="file"/>
+         </column>
+         <primaryKey column="dataset_id" sequenceNumberInPK="1"/>
+         <primaryKey column="file_id" sequenceNumberInPK="2"/>
+      </table>
+      <table name="dataset_geo" numRows="6" remarks="references to external GEO numbers for curated (gds) and submitted (gse) data" schema="isa" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="dataset_id" nullable="false" remarks="" size="19" type="int8">
+            <parent column="id" foreignKey="dataset_geo_dataset_id_fkey" implied="false" onDeleteCascade="true" table="dataset"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="geo_gds" nullable="true" remarks="http://www.ncbi.nlm.nih.gov/sites/GDSbrowser?acc=" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="2" name="geo_gse" nullable="true" remarks="http://www.ncbi.nlm.nih.gov/geo/geo2r/?acc=" size="2147483647" type="text"/>
+         <primaryKey column="dataset_id" sequenceNumberInPK="1"/>
+      </table>
+      <table name="dataset_human_age" numRows="1" remarks="" schema="isa" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="dataset_id" nullable="false" remarks="" size="10" type="int4">
+            <parent column="id" foreignKey="dataset_human_age_dataset_id_fkey" implied="false" onDeleteCascade="false" table="dataset"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="human_age" nullable="false" remarks="" size="2147483647" type="text">
+            <parent column="term" foreignKey="dataset_human_age_human_age_fkey" implied="false" onDeleteCascade="false" table="human_age"/>
+         </column>
+         <primaryKey column="dataset_id" sequenceNumberInPK="1"/>
+         <primaryKey column="human_age" sequenceNumberInPK="2"/>
+      </table>
+      <table name="dataset_human_age_stage" numRows="1" remarks="" schema="isa" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="dataset_id" nullable="false" remarks="" size="19" type="int8">
+            <parent column="id" foreignKey="dataset_human_age_stage_dataset_id_fkey" implied="false" onDeleteCascade="true" table="dataset"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="human_age_stage" nullable="false" remarks="" size="2147483647" type="text">
+            <parent column="term" foreignKey="dataset_human_age_stage_human_age_stage_fkey" implied="false" onDeleteCascade="true" table="human_age_stage"/>
+         </column>
+         <primaryKey column="dataset_id" sequenceNumberInPK="1"/>
+         <primaryKey column="human_age_stage" sequenceNumberInPK="2"/>
+      </table>
+      <table name="dataset_human_anatomic_source" numRows="15" remarks="" schema="isa" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="dataset_id" nullable="false" remarks="" size="19" type="int8">
+            <parent column="id" foreignKey="dataset_human_anatomic_source_dataset_id_fkey" implied="false" onDeleteCascade="true" table="dataset"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="human_anatomic_source" nullable="false" remarks="" size="2147483647" type="text">
+            <parent column="term" foreignKey="dataset_human_anatomic_source_human_anatomic_source_fkey" implied="false" onDeleteCascade="true" table="human_anatomic_source"/>
+         </column>
+         <primaryKey column="dataset_id" sequenceNumberInPK="1"/>
+         <primaryKey column="human_anatomic_source" sequenceNumberInPK="2"/>
+      </table>
+      <table name="dataset_human_enhancer" numRows="2" remarks="" schema="isa" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="dataset_id" nullable="false" remarks="" size="19" type="int8">
+            <parent column="id" foreignKey="dataset_human_enhancer_dataset_id_fkey" implied="false" onDeleteCascade="true" table="dataset"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="human_enhancer" nullable="false" remarks="" size="2147483647" type="text">
+            <parent column="term" foreignKey="dataset_human_enhancer_human_enhancer_fkey" implied="false" onDeleteCascade="true" table="human_enhancer"/>
+         </column>
+         <primaryKey column="dataset_id" sequenceNumberInPK="1"/>
+         <primaryKey column="human_enhancer" sequenceNumberInPK="2"/>
+      </table>
+      <table name="dataset_human_gender" numRows="2" remarks="" schema="isa" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="dataset_id" nullable="false" remarks="" size="19" type="int8">
+            <parent column="id" foreignKey="dataset_human_gender_dataset_id_fkey" implied="false" onDeleteCascade="true" table="dataset"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="human_gender" nullable="false" remarks="" size="2147483647" type="text">
+            <parent column="term" foreignKey="dataset_human_gender_human_gender_fkey" implied="false" onDeleteCascade="true" table="human_gender"/>
+         </column>
+         <primaryKey column="dataset_id" sequenceNumberInPK="1"/>
+         <primaryKey column="human_gender" sequenceNumberInPK="2"/>
+      </table>
+      <table name="dataset_human_phenotype" numRows="1" remarks="" schema="isa" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="dataset_id" nullable="false" remarks="" size="19" type="int8">
+            <parent column="id" foreignKey="dataset_human_phenotype_dataset_id_fkey" implied="false" onDeleteCascade="true" table="dataset"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="human_phenotype" nullable="false" remarks="" size="2147483647" type="text">
+            <parent column="term" foreignKey="dataset_human_phenotype_human_phenotype_fkey" implied="false" onDeleteCascade="true" table="human_phenotype"/>
+         </column>
+         <primaryKey column="dataset_id" sequenceNumberInPK="1"/>
+         <primaryKey column="human_phenotype" sequenceNumberInPK="2"/>
+      </table>
+      <table name="dataset_image" numRows="1643" remarks="this contains asset/thumbnails" schema="isa" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="dataset_id" nullable="false" remarks="" size="19" type="int8">
+            <parent column="id" foreignKey="dataset_image_dataset_id_fkey" implied="false" onDeleteCascade="true" table="dataset"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="image_id" nullable="false" remarks="this is an asset/thumbnail" size="19" type="int8">
+            <parent column="id" foreignKey="dataset_image_image_id_fkey" implied="false" onDeleteCascade="true" table="file"/>
+         </column>
+         <primaryKey column="dataset_id" sequenceNumberInPK="1"/>
+         <primaryKey column="image_id" sequenceNumberInPK="2"/>
+      </table>
+      <table name="dataset_instrument" numRows="103" remarks="" schema="isa" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="dataset_id" nullable="false" remarks="" size="19" type="int8">
+            <parent column="id" foreignKey="dataset_instrument_dataset_id_fkey" implied="false" onDeleteCascade="true" table="dataset"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="instrument" nullable="false" remarks="" size="2147483647" type="text">
+            <parent column="term" foreignKey="dataset_instrument_instrument_fkey" implied="false" onDeleteCascade="true" table="instrument"/>
+         </column>
+         <primaryKey column="dataset_id" sequenceNumberInPK="1"/>
+         <primaryKey column="instrument" sequenceNumberInPK="2"/>
+      </table>
+      <table name="dataset_mouse_age_stage" numRows="602" remarks="" schema="isa" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="dataset_id" nullable="false" remarks="" size="19" type="int8">
+            <parent column="id" foreignKey="dataset_mouse_age_stage_dataset_id_fkey" implied="false" onDeleteCascade="true" table="dataset"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="mouse_age_stage" nullable="false" remarks="" size="2147483647" type="text">
+            <parent column="term" foreignKey="dataset_mouse_age_stage_mouse_age_stage_fkey" implied="false" onDeleteCascade="true" table="mouse_age_stage"/>
+         </column>
+         <primaryKey column="dataset_id" sequenceNumberInPK="1"/>
+         <primaryKey column="mouse_age_stage" sequenceNumberInPK="2"/>
+      </table>
+      <table name="dataset_mouse_anatomic_source" numRows="705" remarks="" schema="isa" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="dataset_id" nullable="false" remarks="" size="19" type="int8">
+            <parent column="id" foreignKey="dataset_mouse_anatomic_source_dataset_id_fkey" implied="false" onDeleteCascade="true" table="dataset"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="mouse_anatomic_source" nullable="false" remarks="" size="2147483647" type="text">
+            <parent column="term" foreignKey="dataset_mouse_anatomic_source_mouse_anatomic_source_fkey" implied="false" onDeleteCascade="true" table="mouse_anatomic_source"/>
+         </column>
+         <primaryKey column="dataset_id" sequenceNumberInPK="1"/>
+         <primaryKey column="mouse_anatomic_source" sequenceNumberInPK="2"/>
+      </table>
+      <table name="dataset_mouse_enhancer" numRows="72" remarks="" schema="isa" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="dataset_id" nullable="true" remarks="" size="19" type="int8">
+            <parent column="id" foreignKey="dataset_mouse_enhancer_dataset_id_fkey" implied="false" onDeleteCascade="true" table="dataset"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="mouse_enhancer" nullable="true" remarks="" size="2147483647" type="text">
+            <parent column="term" foreignKey="dataset_mouse_enhancer_mouse_enhancer_fkey" implied="false" onDeleteCascade="true" table="mouse_enhancer"/>
+         </column>
+      </table>
+      <table name="dataset_mouse_gene" numRows="158" remarks="" schema="isa" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="dataset_id" nullable="false" remarks="" size="19" type="int8">
+            <parent column="id" foreignKey="dataset_mouse_gene_dataset_id_fkey" implied="false" onDeleteCascade="true" table="dataset"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="mouse_gene" nullable="false" remarks="" size="2147483647" type="text">
+            <parent column="term" foreignKey="dataset_mouse_gene_mouse_gene_fkey" implied="false" onDeleteCascade="true" table="mouse_gene"/>
+         </column>
+         <primaryKey column="dataset_id" sequenceNumberInPK="1"/>
+         <primaryKey column="mouse_gene" sequenceNumberInPK="2"/>
+      </table>
+      <table name="dataset_mouse_genetic_background" numRows="552" remarks="" schema="isa" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="dataset_id" nullable="false" remarks="" size="19" type="int8">
+            <parent column="id" foreignKey="dataset_mouse_genetic_background_dataset_id_fkey" implied="false" onDeleteCascade="true" table="dataset"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="mouse_genetic_background" nullable="false" remarks="" size="2147483647" type="text">
+            <parent column="term" foreignKey="dataset_mouse_genetic_background_mouse_genetic_background_fkey" implied="false" onDeleteCascade="true" table="mouse_genetic_background"/>
+         </column>
+         <primaryKey column="dataset_id" sequenceNumberInPK="1"/>
+         <primaryKey column="mouse_genetic_background" sequenceNumberInPK="2"/>
+      </table>
+      <table name="dataset_mouse_genotype" numRows="371" remarks="" schema="isa" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="dataset_id" nullable="false" remarks="" size="19" type="int8">
+            <parent column="id" foreignKey="dataset_mouse_genotype_dataset_id_fkey" implied="false" onDeleteCascade="true" table="dataset"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="mouse_genotype" nullable="false" remarks="" size="2147483647" type="text">
+            <parent column="term" foreignKey="dataset_mouse_genotype_mouse_genotype_fkey" implied="false" onDeleteCascade="true" table="mouse_genotype"/>
+         </column>
+         <primaryKey column="dataset_id" sequenceNumberInPK="1"/>
+         <primaryKey column="mouse_genotype" sequenceNumberInPK="2"/>
+      </table>
+      <table name="dataset_mouse_mutation" numRows="262" remarks="" schema="isa" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="dataset_id" nullable="false" remarks="" size="19" type="int8">
+            <parent column="id" foreignKey="dataset_mouse_mutation_dataset_id_fkey" implied="false" onDeleteCascade="true" table="dataset"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="mouse_mutation" nullable="false" remarks="" size="2147483647" type="text">
+            <parent column="term" foreignKey="dataset_mouse_mutation_mouse_mutation_fkey" implied="false" onDeleteCascade="true" table="mouse_mutation"/>
+         </column>
+         <primaryKey column="dataset_id" sequenceNumberInPK="1"/>
+         <primaryKey column="mouse_mutation" sequenceNumberInPK="2"/>
+      </table>
+      <table name="dataset_mouse_phenotype" numRows="651" remarks="" schema="isa" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="dataset_id" nullable="false" remarks="" size="19" type="int8">
+            <parent column="id" foreignKey="dataset_mouse_phenotype_dataset_id_fkey" implied="false" onDeleteCascade="true" table="dataset"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="mouse_phenotype" nullable="false" remarks="" size="2147483647" type="text">
+            <parent column="term" foreignKey="dataset_mouse_phenotype_mouse_phenotype_fkey" implied="false" onDeleteCascade="true" table="mouse_phenotype"/>
+         </column>
+         <primaryKey column="dataset_id" sequenceNumberInPK="1"/>
+         <primaryKey column="mouse_phenotype" sequenceNumberInPK="2"/>
+      </table>
+      <table name="dataset_mouse_theiler_stage" numRows="14" remarks="" schema="isa" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="dataset_id" nullable="false" remarks="" size="10" type="int4">
+            <parent column="id" foreignKey="dataset_mouse_theiler_stage_dataset_id_fkey" implied="false" onDeleteCascade="false" table="dataset"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="mouse_theiler_stage" nullable="false" remarks="" size="2147483647" type="text">
+            <parent column="term" foreignKey="dataset_mouse_theiler_stage_mouse_theiler_stage_fkey" implied="false" onDeleteCascade="false" table="mouse_theiler_stage"/>
+         </column>
+         <primaryKey column="dataset_id" sequenceNumberInPK="1"/>
+         <primaryKey column="mouse_theiler_stage" sequenceNumberInPK="2"/>
+      </table>
+      <table name="dataset_organism" numRows="653" remarks="" schema="isa" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="dataset_id" nullable="false" remarks="" size="19" type="int8">
+            <parent column="id" foreignKey="dataset_organism_dataset_id_fkey" implied="false" onDeleteCascade="true" table="dataset"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="organism" nullable="false" remarks="" size="2147483647" type="text">
+            <parent column="term" foreignKey="dataset_organism_organism_fkey" implied="false" onDeleteCascade="true" table="organism"/>
+         </column>
+         <primaryKey column="dataset_id" sequenceNumberInPK="1"/>
+         <primaryKey column="organism" sequenceNumberInPK="2"/>
+      </table>
+      <table name="dataset_preview" numRows="1208" remarks="this contains asset/preview" schema="isa" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="dataset_id" nullable="false" remarks="" size="19" type="int8">
+            <parent column="id" foreignKey="dataset_preview_dataset_id_fkey" implied="false" onDeleteCascade="true" table="dataset"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="preview_id" nullable="false" remarks="this is an asset/preview" size="19" type="int8">
+            <parent column="id" foreignKey="dataset_preview_preview_id_fkey" implied="false" onDeleteCascade="true" table="file"/>
+         </column>
+         <primaryKey column="dataset_id" sequenceNumberInPK="1"/>
+         <primaryKey column="preview_id" sequenceNumberInPK="2"/>
+      </table>
+      <table name="dataset_somite_count" numRows="26" remarks="" schema="isa" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="dataset_id" nullable="false" remarks="" size="19" type="int8">
+            <parent column="id" foreignKey="dataset_somite_count_dataset_id_fkey" implied="false" onDeleteCascade="true" table="dataset"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="somite_count" nullable="false" remarks="" size="2147483647" type="text"/>
+         <primaryKey column="dataset_id" sequenceNumberInPK="1"/>
+         <primaryKey column="somite_count" sequenceNumberInPK="2"/>
+      </table>
+      <table name="dataset_status" numRows="3" remarks="" schema="isa" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('dataset_status_id_seq'::regclass)" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="serial">
+            <child column="status" foreignKey="dataset_status_fkey" implied="false" onDeleteCascade="false" table="dataset"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="name" nullable="false" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="2" name="description" nullable="true" remarks="" size="2147483647" type="markdown"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+      </table>
+      <table name="dataset_zebrafish_age_stage" numRows="70" remarks="" schema="isa" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="dataset_id" nullable="false" remarks="" size="19" type="int8">
+            <parent column="id" foreignKey="dataset_zebrafish_age_stage_dataset_id_fkey" implied="false" onDeleteCascade="true" table="dataset"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="zebrafish_age_stage" nullable="false" remarks="" size="2147483647" type="text">
+            <parent column="term" foreignKey="dataset_zebrafish_age_stage_zebrafish_age_stage_fkey" implied="false" onDeleteCascade="true" table="zebrafish_age_stage"/>
+         </column>
+         <primaryKey column="dataset_id" sequenceNumberInPK="1"/>
+         <primaryKey column="zebrafish_age_stage" sequenceNumberInPK="2"/>
+      </table>
+      <table name="dataset_zebrafish_anatomic_source" numRows="28" remarks="" schema="isa" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="dataset_id" nullable="false" remarks="" size="19" type="int8">
+            <parent column="id" foreignKey="dataset_zebrafish_anatomic_source_dataset_id_fkey" implied="false" onDeleteCascade="true" table="dataset"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="zebrafish_anatomic_source" nullable="false" remarks="" size="2147483647" type="text">
+            <parent column="term" foreignKey="dataset_zebrafish_anatomic_sourc_zebrafish_anatomic_source_fkey" implied="false" onDeleteCascade="true" table="zebrafish_anatomic_source"/>
+         </column>
+         <primaryKey column="dataset_id" sequenceNumberInPK="1"/>
+         <primaryKey column="zebrafish_anatomic_source" sequenceNumberInPK="2"/>
+      </table>
+      <table name="dataset_zebrafish_genotype" numRows="20" remarks="" schema="isa" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="dataset_id" nullable="false" remarks="" size="19" type="int8">
+            <parent column="id" foreignKey="dataset_zebrafish_genotype_dataset_id_fkey" implied="false" onDeleteCascade="true" table="dataset"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="zebrafish_genotype" nullable="false" remarks="" size="2147483647" type="text">
+            <parent column="term" foreignKey="dataset_zebrafish_genotype_zebrafish_genotype_fkey" implied="false" onDeleteCascade="true" table="zebrafish_genotype"/>
+         </column>
+         <primaryKey column="dataset_id" sequenceNumberInPK="1"/>
+         <primaryKey column="zebrafish_genotype" sequenceNumberInPK="2"/>
+      </table>
+      <table name="dataset_zebrafish_mutation" numRows="10" remarks="" schema="isa" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="dataset_id" nullable="false" remarks="" size="19" type="int8">
+            <parent column="id" foreignKey="dataset_zebrafish_mutation_dataset_id_fkey" implied="false" onDeleteCascade="false" table="dataset"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="zebrafish_mutation" nullable="false" remarks="" size="2147483647" type="text">
+            <parent column="term" foreignKey="dataset_zebrafish_mutation_zebrafish_mutation_fkey" implied="false" onDeleteCascade="false" table="zebrafish_mutation"/>
+         </column>
+         <primaryKey column="dataset_id" sequenceNumberInPK="1"/>
+         <primaryKey column="zebrafish_mutation" sequenceNumberInPK="2"/>
+      </table>
+      <table name="dataset_zebrafish_phenotype" numRows="34" remarks="" schema="isa" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="dataset_id" nullable="false" remarks="" size="19" type="int8">
+            <parent column="id" foreignKey="dataset_zebrafish_phenotype_dataset_id_fkey" implied="false" onDeleteCascade="false" table="dataset"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="zebrafish_phenotype" nullable="false" remarks="" size="2147483647" type="text">
+            <parent column="term" foreignKey="dataset_zebrafish_phenotype_zebrafish_phenotype_fkey" implied="false" onDeleteCascade="false" table="zebrafish_phenotype"/>
+         </column>
+         <primaryKey column="dataset_id" sequenceNumberInPK="1"/>
+         <primaryKey column="zebrafish_phenotype" sequenceNumberInPK="2"/>
+      </table>
+      <table name="downloads" numRows="0" remarks="" schema="isa" type="VIEW">
+         <column autoUpdated="false" digits="0" id="0" name="dataset_id" nullable="true" remarks="" size="19" type="int8"/>
+         <column autoUpdated="false" digits="0" id="1" name="download_filename" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="2" name="download_bytes" nullable="true" remarks="" size="131089" type="numeric"/>
+         <column autoUpdated="false" digits="0" id="3" name="download_uri" nullable="true" remarks="" size="2147483647" type="text"/>
+      </table>
+      <table name="enhancer" numRows="15" remarks="" schema="isa" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('enhancer_id_seq'::regclass)" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="serial"/>
+         <column autoUpdated="false" digits="0" id="1" name="original_species_assembly" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="2" name="original_species_chromosome" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="3" name="original_species_start" nullable="true" remarks="" size="10" type="int4"/>
+         <column autoUpdated="false" digits="0" id="4" name="original_species_end" nullable="true" remarks="" size="10" type="int4"/>
+         <column autoUpdated="false" digits="0" id="5" name="visualization_assembly" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="6" name="visualization_assembly_chromosome" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="7" name="visualization_assembly_start" nullable="true" remarks="" size="10" type="int4"/>
+         <column autoUpdated="false" digits="0" id="8" name="visualization_assembly_end" nullable="true" remarks="" size="10" type="int4"/>
+         <column autoUpdated="false" digits="0" id="9" name="other_assembly" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="10" name="other_assembly_chromosome" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="11" name="other_assembly_start" nullable="true" remarks="" size="10" type="int4"/>
+         <column autoUpdated="false" digits="0" id="12" name="other_assembly_end" nullable="true" remarks="" size="10" type="int4"/>
+         <column autoUpdated="false" digits="0" id="13" name="tested_sequence" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="14" name="tested_sequence_flag" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="15" name="list_of_closest_genes" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="16" name="external_database_name" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="17" name="external_id" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="18" name="list_of_anatomical_structures" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="19" name="lab_internal_reference" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="20" name="sample" nullable="true" remarks="" size="10" type="int4">
+            <parent column="id" foreignKey="enhancer_sample_fkey" implied="false" onDeleteCascade="false" table="sample"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="21" name="dataset" nullable="true" remarks="" size="10" type="int4">
+            <parent column="id" foreignKey="enhancer_dataset_fkey" implied="false" onDeleteCascade="false" table="dataset"/>
+         </column>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+      </table>
+      <table name="experiment_type" numRows="12" remarks="" schema="isa" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="term" nullable="false" remarks="" size="2147483647" type="text">
+            <child column="experiment_type" foreignKey="dataset_experiment_type_experiment_type_fkey" implied="false" onDeleteCascade="false" table="dataset_experiment_type"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="iri" nullable="true" remarks="" size="2147483647" type="text"/>
+         <primaryKey column="term" sequenceNumberInPK="1"/>
+      </table>
+      <table name="external_reference" numRows="325" remarks="asset/object" schema="isa" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="id" nullable="false" remarks="" size="19" type="int8">
+            <parent column="id" foreignKey="external_reference_id_fkey" implied="false" onDeleteCascade="true" table="dataset"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="uri" nullable="false" remarks="asset/reference" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="2" name="link_text" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="3" name="description" nullable="true" remarks="" size="2147483647" type="text"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <primaryKey column="uri" sequenceNumberInPK="2"/>
+      </table>
+      <table name="file" numRows="3792" remarks="this represents the actual file asset" schema="isa" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="id" nullable="false" remarks="" size="19" type="int8">
+            <child column="file_id" foreignKey="assay_file_file_id_fkey" implied="false" onDeleteCascade="false" table="assay_file"/>
+            <child column="thumbnail" foreignKey="dataset_thumbnail_fkey" implied="false" onDeleteCascade="false" table="dataset"/>
+            <child column="file_id" foreignKey="dataset_file_file_id_fkey" implied="false" onDeleteCascade="true" table="dataset_file"/>
+            <child column="image_id" foreignKey="dataset_image_image_id_fkey" implied="false" onDeleteCascade="true" table="dataset_image"/>
+            <child column="preview_id" foreignKey="dataset_preview_preview_id_fkey" implied="false" onDeleteCascade="true" table="dataset_preview"/>
+            <child column="file" foreignKey="imaging_file_fkey" implied="false" onDeleteCascade="false" table="imaging"/>
+            <child column="file_id" foreignKey="project_protocol_document_file_id_fkey" implied="false" onDeleteCascade="true" table="project_protocol_document"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="filename" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="2" name="uri" nullable="true" remarks="asset/reference" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="3" name="content_type" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="4" name="bytes" nullable="true" remarks="" size="19" type="int8"/>
+         <column autoUpdated="false" digits="6" id="5" name="timestamp" nullable="true" remarks="" size="35" type="timestamptz"/>
+         <column autoUpdated="false" digits="0" id="6" name="image_width" nullable="true" remarks="" size="19" type="int8"/>
+         <column autoUpdated="false" digits="0" id="7" name="image_height" nullable="true" remarks="" size="19" type="int8"/>
+         <column autoUpdated="false" digits="0" id="8" name="preview" nullable="true" remarks="asset/thumbnail" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="9" name="dataset" nullable="true" remarks="" size="10" type="int4"/>
+         <column autoUpdated="false" digits="0" id="10" name="checksum_type" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="11" name="checksum" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="12" name="ark" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="13" name="accession_number" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="14" name="file_format" nullable="true" remarks="" size="10" type="int4">
+            <parent column="id" foreignKey="file_file_format_fkey" implied="false" onDeleteCascade="false" table="file_format"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="15" name="submission_date" nullable="true" remarks="" size="13" type="date"/>
+         <column autoUpdated="false" digits="0" id="16" name="caption" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="17" name="dimensionality" nullable="true" remarks="" size="2147483647" type="text"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+      </table>
+      <table name="human_age" numRows="42" remarks="" schema="isa" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="term" nullable="false" remarks="" size="2147483647" type="text">
+            <child column="human_age" foreignKey="dataset_human_age_human_age_fkey" implied="false" onDeleteCascade="false" table="dataset_human_age"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="iri" nullable="true" remarks="" size="2147483647" type="text"/>
+         <primaryKey column="term" sequenceNumberInPK="1"/>
+      </table>
+      <table name="human_age_stage" numRows="37" remarks="vocabulary" schema="isa" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="term" nullable="false" remarks="" size="2147483647" type="text">
+            <child column="human_age_stage" foreignKey="dataset_human_age_stage_human_age_stage_fkey" implied="false" onDeleteCascade="true" table="dataset_human_age_stage"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="iri" nullable="true" remarks="" size="2147483647" type="text"/>
+         <primaryKey column="term" sequenceNumberInPK="1"/>
+      </table>
+      <table name="human_anatomic_source" numRows="83" remarks="vocabulary" schema="isa" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="term" nullable="false" remarks="" size="2147483647" type="text">
+            <child column="human_anatomic_source" foreignKey="dataset_human_anatomic_source_human_anatomic_source_fkey" implied="false" onDeleteCascade="true" table="dataset_human_anatomic_source"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="iri" nullable="true" remarks="" size="2147483647" type="text"/>
+         <primaryKey column="term" sequenceNumberInPK="1"/>
+      </table>
+      <table name="human_enhancer" numRows="4" remarks="vocabulary" schema="isa" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="term" nullable="false" remarks="" size="2147483647" type="text">
+            <child column="human_enhancer" foreignKey="dataset_human_enhancer_human_enhancer_fkey" implied="false" onDeleteCascade="true" table="dataset_human_enhancer"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="iri" nullable="true" remarks="" size="2147483647" type="text"/>
+         <primaryKey column="term" sequenceNumberInPK="1"/>
+      </table>
+      <table name="human_gender" numRows="2" remarks="vocabulary" schema="isa" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="term" nullable="false" remarks="" size="2147483647" type="text">
+            <child column="human_gender" foreignKey="dataset_human_gender_human_gender_fkey" implied="false" onDeleteCascade="true" table="dataset_human_gender"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="iri" nullable="true" remarks="" size="2147483647" type="text"/>
+         <primaryKey column="term" sequenceNumberInPK="1"/>
+      </table>
+      <table name="human_phenotype" numRows="23" remarks="vocabulary" schema="isa" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="term" nullable="false" remarks="" size="2147483647" type="text">
+            <child column="human_phenotype" foreignKey="dataset_human_phenotype_human_phenotype_fkey" implied="false" onDeleteCascade="true" table="dataset_human_phenotype"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="iri" nullable="true" remarks="" size="2147483647" type="text"/>
+         <primaryKey column="term" sequenceNumberInPK="1"/>
+      </table>
+      <table name="image_staining" numRows="7" remarks="" schema="isa" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="imaging" nullable="true" remarks="" size="10" type="int4">
+            <parent column="id" foreignKey="image_staining_imaging_fkey" implied="false" onDeleteCascade="true" table="imaging"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="stain" nullable="true" remarks="" size="10" type="int4">
+            <parent column="id" foreignKey="image_staining_stain_fkey" implied="false" onDeleteCascade="false" table="chemical_entities"/>
+         </column>
+      </table>
+      <table name="images" numRows="0" remarks="" schema="isa" type="VIEW">
+         <column autoUpdated="false" digits="0" id="0" name="dataset_id" nullable="true" remarks="" size="19" type="int8"/>
+         <column autoUpdated="false" digits="0" id="1" name="image_name" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="2" name="image_uri" nullable="true" remarks="" size="2147483647" type="text"/>
+      </table>
+      <table name="imaging" numRows="162" remarks="" schema="isa" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('imaging_id_seq'::regclass)" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="serial">
+            <child column="imaging" foreignKey="image_staining_imaging_fkey" implied="false" onDeleteCascade="true" table="image_staining"/>
+            <child column="derived_from" foreignKey="imaging_derived_from_fkey" implied="false" onDeleteCascade="false" table="imaging"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="sample" nullable="false" remarks="" size="10" type="int4">
+            <parent column="id" foreignKey="imaging_sample_fkey" implied="false" onDeleteCascade="true" table="sample"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="2" name="file" nullable="false" remarks="" size="19" type="int8">
+            <parent column="id" foreignKey="imaging_file_fkey" implied="false" onDeleteCascade="false" table="file"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="3" name="derived_from" nullable="true" remarks="" size="10" type="int4">
+            <parent column="id" foreignKey="imaging_derived_from_fkey" implied="false" onDeleteCascade="false" table="imaging"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="4" name="anatomy" nullable="true" remarks="" size="10" type="int4">
+            <parent column="id" foreignKey="imaging_anatomy_fkey" implied="false" onDeleteCascade="false" table="anatomy"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="5" name="thumbnail" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="6" name="device" nullable="true" remarks="" size="10" type="int4">
+            <parent column="id" foreignKey="imaging_device_fkey" implied="false" onDeleteCascade="false" table="image_creation_device"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="7" name="equipment_model" nullable="true" remarks="" size="2147483647" type="text">
+            <parent column="term" foreignKey="imaging_equipment_model_fkey" implied="false" onDeleteCascade="false" table="instrument"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="8" name="description" nullable="true" remarks="" size="2147483647" type="markdown"/>
+         <column autoUpdated="false" digits="0" id="9" name="dataset" nullable="true" remarks="" size="10" type="int4">
+            <parent column="id" foreignKey="imaging_dataset_fkey" implied="false" onDeleteCascade="false" table="dataset"/>
+         </column>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+      </table>
+      <table name="imaging_method" numRows="16" remarks="" schema="isa" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="term" nullable="false" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="1" name="iri" nullable="true" remarks="" size="2147483647" type="text"/>
+         <primaryKey column="term" sequenceNumberInPK="1"/>
+      </table>
+      <table name="instrument" numRows="8" remarks="vocabulary" schema="isa" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="term" nullable="false" remarks="" size="2147483647" type="text">
+            <child column="instrument" foreignKey="dataset_instrument_instrument_fkey" implied="false" onDeleteCascade="true" table="dataset_instrument"/>
+            <child column="equipment_model" foreignKey="imaging_equipment_model_fkey" implied="false" onDeleteCascade="false" table="imaging"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="iri" nullable="true" remarks="" size="2147483647" type="text"/>
+         <primaryKey column="term" sequenceNumberInPK="1"/>
+      </table>
+      <table name="jax_strain" numRows="46" remarks="" schema="isa" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="term" nullable="false" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="1" name="iri" nullable="true" remarks="" size="2147483647" type="text"/>
+         <primaryKey column="term" sequenceNumberInPK="1"/>
+      </table>
+      <table name="library" numRows="20" remarks="" schema="isa" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('library_id_seq'::regclass)" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="serial">
+            <child column="library_id" foreignKey="assay_library_id_fkey" implied="false" onDeleteCascade="false" table="assay"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="name" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="2" name="library_type" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="3" name="single_paired_end_sequencing" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="4" name="library_adapters" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="5" name="pcr_cycles" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="6" name="library_yield" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="7" name="size_selection" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="8" name="platform" nullable="true" remarks="" size="2147483647" type="text"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+      </table>
+      <table name="mouse_age_stage" numRows="31" remarks="vocabulary" schema="isa" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="term" nullable="false" remarks="" size="2147483647" type="text">
+            <child column="mouse_age_stage" foreignKey="dataset_mouse_age_stage_mouse_age_stage_fkey" implied="false" onDeleteCascade="true" table="dataset_mouse_age_stage"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="iri" nullable="true" remarks="" size="2147483647" type="text"/>
+         <primaryKey column="term" sequenceNumberInPK="1"/>
+      </table>
+      <table name="mouse_anatomic_source" numRows="135" remarks="vocabulary" schema="isa" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="term" nullable="false" remarks="" size="2147483647" type="text">
+            <child column="mouse_anatomic_source" foreignKey="dataset_mouse_anatomic_source_mouse_anatomic_source_fkey" implied="false" onDeleteCascade="true" table="dataset_mouse_anatomic_source"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="iri" nullable="true" remarks="" size="2147483647" type="text"/>
+         <primaryKey column="term" sequenceNumberInPK="1"/>
+      </table>
+      <table name="mouse_enhancer" numRows="71" remarks="vocabulary" schema="isa" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="term" nullable="false" remarks="" size="2147483647" type="text">
+            <child column="mouse_enhancer" foreignKey="dataset_mouse_enhancer_mouse_enhancer_fkey" implied="false" onDeleteCascade="true" table="dataset_mouse_enhancer"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="iri" nullable="true" remarks="" size="2147483647" type="text"/>
+         <primaryKey column="term" sequenceNumberInPK="1"/>
+      </table>
+      <table name="mouse_gene" numRows="19" remarks="vocabulary" schema="isa" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="term" nullable="false" remarks="" size="2147483647" type="text">
+            <child column="mouse_gene" foreignKey="dataset_mouse_gene_mouse_gene_fkey" implied="false" onDeleteCascade="true" table="dataset_mouse_gene"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="iri" nullable="true" remarks="" size="2147483647" type="text"/>
+         <primaryKey column="term" sequenceNumberInPK="1"/>
+      </table>
+      <table name="mouse_genetic_background" numRows="85" remarks="vocabulary" schema="isa" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="term" nullable="false" remarks="" size="2147483647" type="text">
+            <child column="mouse_genetic_background" foreignKey="dataset_mouse_genetic_background_mouse_genetic_background_fkey" implied="false" onDeleteCascade="true" table="dataset_mouse_genetic_background"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="iri" nullable="true" remarks="" size="2147483647" type="text"/>
+         <primaryKey column="term" sequenceNumberInPK="1"/>
+      </table>
+      <table name="mouse_genotype" numRows="31" remarks="vocabulary" schema="isa" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="term" nullable="false" remarks="" size="2147483647" type="text">
+            <child column="mouse_genotype" foreignKey="dataset_mouse_genotype_mouse_genotype_fkey" implied="false" onDeleteCascade="true" table="dataset_mouse_genotype"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="iri" nullable="true" remarks="" size="2147483647" type="text"/>
+         <primaryKey column="term" sequenceNumberInPK="1"/>
+      </table>
+      <table name="mouse_mutation" numRows="23" remarks="vocabulary" schema="isa" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="term" nullable="false" remarks="" size="2147483647" type="text">
+            <child column="mouse_mutation" foreignKey="dataset_mouse_mutation_mouse_mutation_fkey" implied="false" onDeleteCascade="true" table="dataset_mouse_mutation"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="iri" nullable="true" remarks="" size="2147483647" type="text"/>
+         <primaryKey column="term" sequenceNumberInPK="1"/>
+      </table>
+      <table name="mouse_phenotype" numRows="43" remarks="vocabulary" schema="isa" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="term" nullable="false" remarks="" size="2147483647" type="text">
+            <child column="mouse_phenotype" foreignKey="dataset_mouse_phenotype_mouse_phenotype_fkey" implied="false" onDeleteCascade="true" table="dataset_mouse_phenotype"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="iri" nullable="true" remarks="" size="2147483647" type="text"/>
+         <primaryKey column="term" sequenceNumberInPK="1"/>
+      </table>
+      <table name="mouse_theiler_stage" numRows="27" remarks="" schema="isa" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="term" nullable="false" remarks="" size="2147483647" type="text">
+            <child column="mouse_theiler_stage" foreignKey="dataset_mouse_theiler_stage_mouse_theiler_stage_fkey" implied="false" onDeleteCascade="false" table="dataset_mouse_theiler_stage"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="iri" nullable="true" remarks="" size="2147483647" type="text"/>
+         <primaryKey column="term" sequenceNumberInPK="1"/>
+      </table>
+      <table name="organism" numRows="4" remarks="vocabulary" schema="isa" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="term" nullable="false" remarks="" size="2147483647" type="text">
+            <child column="organism" foreignKey="dataset_organism_organism_fkey" implied="false" onDeleteCascade="true" table="dataset_organism"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="iri" nullable="true" remarks="" size="2147483647" type="text"/>
+         <primaryKey column="term" sequenceNumberInPK="1"/>
+      </table>
+      <table name="person" numRows="56" remarks="domain" schema="isa" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="name" nullable="false" remarks="" size="2147483647" type="text">
+            <child column="owner" foreignKey="dataset_owner_fkey" implied="false" onDeleteCascade="true" table="dataset"/>
+            <child column="username" foreignKey="project_investigator_username_fkey" implied="false" onDeleteCascade="true" table="project_investigator"/>
+            <child column="username" foreignKey="project_member_username_fkey" implied="false" onDeleteCascade="true" table="project_member"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="first_name" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="2" name="middle_name" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="3" name="last_name" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="4" name="email" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="5" name="degrees" nullable="true" remarks="" size="2147483647" type="json"/>
+         <column autoUpdated="false" digits="0" id="6" name="affiliation" nullable="true" remarks="" size="2147483647" type="json"/>
+         <column autoUpdated="false" digits="0" id="7" name="website" nullable="true" remarks="" size="2147483647" type="text"/>
+         <primaryKey column="name" sequenceNumberInPK="1"/>
+      </table>
+      <table name="previews" numRows="0" remarks="" schema="isa" type="VIEW">
+         <column autoUpdated="false" digits="0" id="0" name="dataset_id" nullable="true" remarks="" size="19" type="int8"/>
+         <column autoUpdated="false" digits="0" id="1" name="filename" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="2" name="preview_uri" nullable="true" remarks="" size="2147483647" type="text"/>
+      </table>
+      <table name="project" numRows="21" remarks="domain" schema="isa" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="id" nullable="false" remarks="" size="19" type="int8">
+            <child column="project" foreignKey="dataset_project_fkey" implied="false" onDeleteCascade="true" table="dataset"/>
+            <child column="contributed_by" foreignKey="gene_summary_contributed_by_fkey" implied="false" onDeleteCascade="false" table="gene_summary"/>
+            <child column="project_id" foreignKey="project_investigator_project_id_fkey" implied="false" onDeleteCascade="true" table="project_investigator"/>
+            <child column="project_id" foreignKey="project_member_project_id_fkey" implied="false" onDeleteCascade="true" table="project_member"/>
+            <child column="project_id" foreignKey="project_protocol_document_project_id_fkey" implied="false" onDeleteCascade="true" table="project_protocol_document"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="funding" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="2" name="url" nullable="true" remarks="url for more information on this project on externalre site" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="3" name="name" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="4" name="abstract" nullable="true" remarks="" size="2147483647" type="markdown"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+      </table>
+      <table name="project_investigator" numRows="39" remarks="" schema="isa" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="project_id" nullable="false" remarks="" size="19" type="int8">
+            <parent column="id" foreignKey="project_investigator_project_id_fkey" implied="false" onDeleteCascade="true" table="project"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="username" nullable="false" remarks="" size="2147483647" type="text">
+            <parent column="name" foreignKey="project_investigator_username_fkey" implied="false" onDeleteCascade="true" table="person"/>
+         </column>
+         <primaryKey column="project_id" sequenceNumberInPK="1"/>
+         <primaryKey column="username" sequenceNumberInPK="2"/>
+      </table>
+      <table name="project_member" numRows="45" remarks="domain" schema="isa" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="project_id" nullable="false" remarks="" size="19" type="int8">
+            <parent column="id" foreignKey="project_member_project_id_fkey" implied="false" onDeleteCascade="true" table="project"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="username" nullable="false" remarks="" size="2147483647" type="text">
+            <parent column="name" foreignKey="project_member_username_fkey" implied="false" onDeleteCascade="true" table="person"/>
+         </column>
+         <primaryKey column="project_id" sequenceNumberInPK="1"/>
+         <primaryKey column="username" sequenceNumberInPK="2"/>
+      </table>
+      <table name="project_protocol_document" numRows="0" remarks="could be considered an asset/description" schema="isa" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="project_id" nullable="false" remarks="" size="19" type="int8">
+            <parent column="id" foreignKey="project_protocol_document_project_id_fkey" implied="false" onDeleteCascade="true" table="project"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="file_id" nullable="false" remarks="" size="19" type="int8">
+            <parent column="id" foreignKey="project_protocol_document_file_id_fkey" implied="false" onDeleteCascade="true" table="file"/>
+         </column>
+         <primaryKey column="project_id" sequenceNumberInPK="1"/>
+         <primaryKey column="file_id" sequenceNumberInPK="2"/>
+      </table>
+      <table name="publication" numRows="0" remarks="" schema="isa" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('publication_id_seq'::regclass)" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="serial"/>
+         <column autoUpdated="false" digits="0" id="1" name="title" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="2" name="pubmed_id" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="3" name="dataset" nullable="true" remarks="" size="10" type="int4">
+            <parent column="id" foreignKey="publication_dataset_fkey" implied="false" onDeleteCascade="false" table="dataset"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="4" name="status" nullable="true" remarks="" size="2147483647" type="text"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+      </table>
+      <table name="sample" numRows="29" remarks="" schema="isa" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('sample_id_seq'::regclass)" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="serial">
+            <child column="sample" foreignKey="assay_sample_fkey" implied="false" onDeleteCascade="false" table="assay"/>
+            <child column="sample" foreignKey="enhancer_sample_fkey" implied="false" onDeleteCascade="false" table="enhancer"/>
+            <child column="sample" foreignKey="imaging_sample_fkey" implied="false" onDeleteCascade="true" table="imaging"/>
+            <child column="sample" foreignKey="track_file_sample_fkey" implied="false" onDeleteCascade="false" table="track_file"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="accession_number" nullable="false" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="2" name="dataset" nullable="false" remarks="" size="10" type="int4">
+            <parent column="id" foreignKey="sample_dataset_fkey" implied="false" onDeleteCascade="false" table="dataset"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="3" name="replicate" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="4" name="local_identifier" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="5" name="species" nullable="true" remarks="" size="10" type="int4">
+            <parent column="id" foreignKey="sample_species_fkey" implied="false" onDeleteCascade="false" table="species"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="6" name="specimen" nullable="true" remarks="" size="10" type="int4">
+            <parent column="id" foreignKey="sample_specimen_fkey" implied="false" onDeleteCascade="false" table="specimen"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="7" name="gene" nullable="true" remarks="" size="10" type="int4">
+            <parent column="id" foreignKey="sample_gene_fkey" implied="false" onDeleteCascade="false" table="gene"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="8" name="genotype" nullable="true" remarks="" size="10" type="int4">
+            <parent column="id" foreignKey="sample_genotype_fkey" implied="false" onDeleteCascade="false" table="genotype"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="9" name="strain" nullable="true" remarks="" size="10" type="int4">
+            <parent column="id" foreignKey="sample_strain_fkey" implied="false" onDeleteCascade="false" table="strain"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="10" name="origin" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="11" name="mutation" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="12" name="stage" nullable="true" remarks="" size="10" type="int4">
+            <parent column="id" foreignKey="sample_stage_fkey" implied="false" onDeleteCascade="false" table="stage"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="13" name="theiler_stage" nullable="true" remarks="" size="10" type="int4">
+            <parent column="id" foreignKey="sample_theiler_stage_fkey" implied="false" onDeleteCascade="false" table="theiler_stage"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="14" name="anatomy" nullable="true" remarks="" size="10" type="int4">
+            <parent column="id" foreignKey="sample_anatomy_fkey" implied="false" onDeleteCascade="false" table="anatomy"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="15" name="phenotype" nullable="true" remarks="" size="10" type="int4">
+            <parent column="id" foreignKey="sample_phenotype_fkey" implied="false" onDeleteCascade="false" table="phenotype"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="16" name="litter" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="17" name="gender" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="18" name="collection_date" nullable="true" remarks="" size="13" type="date"/>
+         <column autoUpdated="false" digits="0" id="19" name="clinical" nullable="true" remarks="" size="10" type="int4">
+            <parent column="id" foreignKey="sample_clinical_fkey" implied="false" onDeleteCascade="false" table="clinical"/>
+         </column>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+      </table>
+      <table name="specimen" numRows="19" remarks="" schema="isa" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="term" nullable="false" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="1" name="iri" nullable="true" remarks="" size="2147483647" type="text"/>
+         <primaryKey column="term" sequenceNumberInPK="1"/>
+      </table>
+      <table name="track_file" numRows="90" remarks="" schema="isa" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('track_file_id_seq'::regclass)" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="serial"/>
+         <column autoUpdated="false" digits="0" id="1" name="filename" nullable="false" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="2" name="uri" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="3" name="dataset" nullable="false" remarks="" size="10" type="int4">
+            <parent column="id" foreignKey="track_file_dataset_fkey" implied="false" onDeleteCascade="false" table="dataset"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="4" name="sample" nullable="true" remarks="" size="10" type="int4">
+            <parent column="id" foreignKey="track_file_sample_fkey" implied="false" onDeleteCascade="false" table="sample"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="5" name="assay" nullable="true" remarks="" size="10" type="int4">
+            <parent column="id" foreignKey="track_file_assay_fkey" implied="false" onDeleteCascade="false" table="assay"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="6" name="checksum_type" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="7" name="checksum" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="8" name="file_format" nullable="true" remarks="" size="10" type="int4">
+            <parent column="id" foreignKey="track_file_file_format_fkey" implied="false" onDeleteCascade="false" table="file_format"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="9" name="bytes" nullable="true" remarks="" size="19" type="int8"/>
+         <column autoUpdated="false" digits="0" id="10" name="content_type" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="11" name="caption" nullable="true" remarks="" size="2147483647" type="text"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+      </table>
+      <table name="tracks" numRows="20" remarks="" schema="isa" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('tracks_id_seq'::regclass)" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="serial">
+            <child column="tracks_id" foreignKey="assay_tracks_id_fkey" implied="false" onDeleteCascade="false" table="assay"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="name" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="2" name="format" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="3" name="software" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="4" name="version" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="5" name="settings" nullable="true" remarks="" size="2147483647" type="text"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+      </table>
+      <table name="zebrafish_age_stage" numRows="61" remarks="vocabulary" schema="isa" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="term" nullable="false" remarks="" size="2147483647" type="text">
+            <child column="zebrafish_age_stage" foreignKey="dataset_zebrafish_age_stage_zebrafish_age_stage_fkey" implied="false" onDeleteCascade="true" table="dataset_zebrafish_age_stage"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="iri" nullable="true" remarks="" size="2147483647" type="text"/>
+         <primaryKey column="term" sequenceNumberInPK="1"/>
+      </table>
+      <table name="zebrafish_anatomic_source" numRows="130" remarks="vocabulary" schema="isa" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="term" nullable="false" remarks="" size="2147483647" type="text">
+            <child column="zebrafish_anatomic_source" foreignKey="dataset_zebrafish_anatomic_sourc_zebrafish_anatomic_source_fkey" implied="false" onDeleteCascade="true" table="dataset_zebrafish_anatomic_source"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="iri" nullable="true" remarks="" size="2147483647" type="text"/>
+         <primaryKey column="term" sequenceNumberInPK="1"/>
+      </table>
+      <table name="zebrafish_genotype" numRows="14" remarks="vocabulary" schema="isa" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="term" nullable="false" remarks="" size="2147483647" type="text">
+            <child column="zebrafish_genotype" foreignKey="dataset_zebrafish_genotype_zebrafish_genotype_fkey" implied="false" onDeleteCascade="true" table="dataset_zebrafish_genotype"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="iri" nullable="true" remarks="" size="2147483647" type="text"/>
+         <primaryKey column="term" sequenceNumberInPK="1"/>
+      </table>
+      <table name="zebrafish_mutation" numRows="12" remarks="" schema="isa" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="term" nullable="false" remarks="" size="2147483647" type="text">
+            <child column="zebrafish_mutation" foreignKey="dataset_zebrafish_mutation_zebrafish_mutation_fkey" implied="false" onDeleteCascade="false" table="dataset_zebrafish_mutation"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="iri" nullable="true" remarks="" size="2147483647" type="text"/>
+         <primaryKey column="term" sequenceNumberInPK="1"/>
+      </table>
+      <table name="zebrafish_phenotype" numRows="21" remarks="" schema="isa" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="term" nullable="false" remarks="" size="2147483647" type="text">
+            <child column="zebrafish_phenotype" foreignKey="dataset_zebrafish_phenotype_zebrafish_phenotype_fkey" implied="false" onDeleteCascade="false" table="dataset_zebrafish_phenotype"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="iri" nullable="true" remarks="" size="2147483647" type="text"/>
+         <primaryKey column="term" sequenceNumberInPK="1"/>
+      </table>
+   </tables>
+</database>
