@@ -1,0 +1,72 @@
+@prefix : <http://www.monarchinitiative.org/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix RO: <http://purl.obolibrary.org/obo/RO_> .
+@prefix BFO: <http://purl.obolibrary.org/obo/BFO_> .
+@prefix ClinVar: <http://www.ncbi.nlm.nih.gov/clinvar/> .
+@prefix ClinVarVariant: <http://www.ncbi.nlm.nih.gov/clinvar/variation/> .
+@prefix ECO: <http://purl.obolibrary.org/obo/ECO_> .
+@prefix GENO: <http://purl.obolibrary.org/obo/GENO_> .
+@prefix IAO: <http://purl.obolibrary.org/obo/IAO_> .
+@prefix MONARCH: <http://www.monarchinitiative.org/MONARCH_> .
+@prefix MedGen: <http://www.ncbi.nlm.nih.gov/medgen/> .
+@prefix NCBIGene: <http://www.ncbi.nlm.nih.gov/gene/> .
+@prefix OBAN: <http://purl.org/oban/> .
+@prefix OBO: <http://purl.obolibrary.org/obo/> .
+@prefix OIO: <http://www.geneontology.org/formats/oboInOwl#> .
+@prefix OMIM: <http://purl.obolibrary.org/obo/OMIM_> .
+@prefix Orphanet: <http://www.orpha.net/ORDO/Orphanet_> .
+@prefix PMID: <http://www.ncbi.nlm.nih.gov/pubmed/> .
+@prefix dbSNP: <http://www.ncbi.nlm.nih.gov/projects/SNP/snp_ref.cgi?rs=> .
+@prefix NCBITaxon: <http://purl.obolibrary.org/obo/NCBITaxon_> .
+@prefix SO: <http://purl.obolibrary.org/obo/SO_> .
+
+------------------------------------------------------------
+#ttl
+
+MONARCH:xxxxxxxxxxxxxxxxxxxxxx a OBAN:association ;
+    OBAN:association_has_object OMIM:208900 ;
+    OBAN:association_has_predicate GENO:0000845 ;
+    OBAN:association_has_subject ClinVarVariant:424841 .
+		
+ClinVarVariant:424841 a GENO:0000030 ;
+	rdfs:label "NM_000051.3(ATM): c.[1236-2A>T];[497-1G>A]" ;
+	RO:0002162 NCBITaxon:9606 ;
+	GENO:0000382 dbSNP:80159221 ;
+	GENO:0000382 dbSNP:778624615 ;
+	GENO:0000608 GENO:0000402 ;
+	GENO:0000845 OMIM:208900 ; 
+	GENO:0000418 NCBIGene:472 .
+
+dbSNP:778624615 a SO:0001483 ;
+	rdfs:label "NM_000051.3(ATM): c.497-1G>A".
+
+dbSNP:80159221 a SO:0001483 ;
+	rdfs:label "NM_000051.3(ATM): c.1236-2A>T" .
+
+------------------------------------------------------------
+
+#n-triples
+
+<http://www.monarchinitiative.org/MONARCH_xxxxxxxxxxxxxxxxxxxxxx> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/oban/association> .
+<http://www.monarchinitiative.org/MONARCH_xxxxxxxxxxxxxxxxxxxxxx> <http://purl.org/oban/association_has_object> <http://purl.obolibrary.org/obo/OMIM_208900> .
+<http://www.monarchinitiative.org/MONARCH_xxxxxxxxxxxxxxxxxxxxxx> <http://purl.org/oban/association_has_predicate> <http://purl.obolibrary.org/obo/GENO_0000845> .
+<http://www.monarchinitiative.org/MONARCH_xxxxxxxxxxxxxxxxxxxxxx> <http://purl.org/oban/association_has_subject> <http://www.ncbi.nlm.nih.gov/clinvar/variation/424841> .
+
+<http://www.ncbi.nlm.nih.gov/clinvar/variation/424841> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.obolibrary.org/obo/GENO_0000030> .
+<http://www.ncbi.nlm.nih.gov/clinvar/variation/424841> <http://www.w3.org/2000/01/rdf-schema#label> "NM_000051.3(ATM): c.[1236-2A>T];[497-1G>A]" .
+<http://www.ncbi.nlm.nih.gov/clinvar/variation/424841> <http://purl.obolibrary.org/obo/RO_0002162> <http://purl.obolibrary.org/obo/NCBITaxon_9606> .
+<http://www.ncbi.nlm.nih.gov/clinvar/variation/424841> <http://purl.obolibrary.org/obo/GENO_0000382> <http://www.ncbi.nlm.nih.gov/projects/SNP/snp_ref.cgi?rs=80159221> .
+<http://www.ncbi.nlm.nih.gov/clinvar/variation/424841> <http://purl.obolibrary.org/obo/GENO_0000382> <http://www.ncbi.nlm.nih.gov/projects/SNP/snp_ref.cgi?rs=778624615> .
+<http://www.ncbi.nlm.nih.gov/clinvar/variation/424841> <http://purl.obolibrary.org/obo/GENO_0000608> <http://purl.obolibrary.org/obo/GENO_0000402> .
+<http://www.ncbi.nlm.nih.gov/clinvar/variation/424841> <http://purl.obolibrary.org/obo/GENO_0000845> <http://purl.obolibrary.org/obo/OMIM_208900> .
+<http://www.ncbi.nlm.nih.gov/clinvar/variation/424841> <http://purl.obolibrary.org/obo/GENO_0000418> <http://www.ncbi.nlm.nih.gov/gene/472> .
+
+<http://www.ncbi.nlm.nih.gov/projects/SNP/snp_ref.cgi?rs=778624615> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.obolibrary.org/obo/SO_0001483> .
+<http://www.ncbi.nlm.nih.gov/projects/SNP/snp_ref.cgi?rs=778624615> <http://www.w3.org/2000/01/rdf-schema#label> "NM_000051.3(ATM): c.497-1G>A" .
+
+<http://www.ncbi.nlm.nih.gov/projects/SNP/snp_ref.cgi?rs=80159221> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.obolibrary.org/obo/SO_0001483> .
+<http://www.ncbi.nlm.nih.gov/projects/SNP/snp_ref.cgi?rs=80159221> <http://www.w3.org/2000/01/rdf-schema#label> "NM_000051.3(ATM): c.1236-2A>T" .
