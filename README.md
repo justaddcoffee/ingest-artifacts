@@ -8,7 +8,7 @@ In this repo, each Monarch data source has its own directory holding the followi
   
  - _**Source Data Views:**_  Subsets or tidy versions of source data to facilitate exploration.
  - _**Notebooks:**_   Sharable notebooks set up for exploration of source data to be converted to RDF by Dipper.
- - _**Ontologist Cmaps:**_   Standardized diagrams that specify a target data model for a particular source, along with informal transform specifications for mapping source data to the target model.
+ - _**Ontologist Cmaps:**_   Standardized diagrams that specify a target data model for a particular source, along with informal transform specifications for mapping source data to the target model. (The cmap files can be created and viewed with the **program [here](http://cmap.ihmc.us/))**.
  - _**Dipper RDF files:**_  Slim versions of each transformed data set that holds selected subset of records for QA and testing purposes.
  - _**Test Querys:**_   SPARQL or Cypher query used for exploration and QA of Dipper outputs. 
  - _**Documentation:**_  Draft versions of data model diagrams.
