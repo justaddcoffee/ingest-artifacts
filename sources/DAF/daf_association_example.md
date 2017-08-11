@@ -4,4 +4,4 @@ Our model uses the [OBAN](https://github.com/EBISPOT/OBAN) ontology to reify the
 We use the [GENO](https://github.com/monarch-initiative/GENO-ontology) ontology to represent features of the FISH genotype.  
 We use the [SEPIO](https://github.com/monarch-initiative/SEPIO-ontology) ontology to represent provided evidnece and provenance information.  
 
-![7-14-17 zfin daf example](https://github.com/monarch-initiative/ingest-artifacts/blob/master/sources/DAF/7-14-17%20ZFIN%20DAF%20example.jpg)
+![7-14-17 ZFIN-DAF-1](https://github.com/monarch-initiative/ingest-artifacts/blob/master/sources/DAF/7-14-17%20DAF-ZFIN-1.jpg)
