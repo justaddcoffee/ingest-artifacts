@@ -1,3 +1,9 @@
+## The following ttl was derived from manual edits to the text-based export of the SGD cmap here: https://github.com/monarch-initiative/ingest-artifacts/blob/master/sources/SGD/11-28-17%20SGD%20Gene-Pheno.cmap
+## We are working on a cmap2ttl script that can automate the generation of ttl directly from a cmap.
+## The directly exported text from the cmap is at the end of this document. 
+
+-------------------------------------------
+
 @prefix OWL:  <http://www.w3.org/2002/07/owl#> .
 @prefix RDFS: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix RDF: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
@@ -26,4 +32,17 @@ SGDREF:S000145858 a IAO:0000311 .
 
 SGD:S000007268 RO:0002200 MONARCH:APO_0000309APO_0000245 .
 
+
+---------------------------------------------
+
+Text as directly exported from cmap (and edited to produce the ttl above):
+
+SGD:S000007268 //'ATP6'//	RO:0002200 //has_phenotype//	MONARCH:APO_0000309APO_0000245 'respiratory growth:decreased rate'
+MONARCH:XXXXXXXX is_a OBAN:association	RO:0002558 //has_evidence//	APO:0000020 //'classical genetics'//
+MONARCH:XXXXXXXX is_a OBAN:association	DC:description	"genomic background:Other | allele: atp6-L183R (L183R) | mutant type: reduction of function | chemical: glycerol | condition:elevated temperature | (35 deg C)|nonfermentable carbon source"
+MONARCH:XXXXXXXX is_a OBAN:association	OBAN:association_has_ predicate	RO:0002200 //has_phenotype//
+MONARCH:XXXXXXXX is_a OBAN:association	DC:source	PMID:21715656 is_a IAO:0000311 //'publication'//
+PMID:21715656 is_a IAO:0000311 //'publication'//	owl:sameAs	SGDREF:S000145858 is_a IAO:0000311 //'publication'//
+MONARCH:XXXXXXXX is_a OBAN:association	OBAN:association_ has_object	MONARCH:APO_0000309APO_0000245 'respiratory growth:decreased rate'
+MONARCH:XXXXXXXX is_a OBAN:association	OBAN:association_ has_subject	SGD:S000007268 //'ATP6'//
 
